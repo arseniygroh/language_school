@@ -7,7 +7,7 @@ export default function AuthForm() {
     const {pathname} = useLocation();
     const navigate = useNavigate();
 
-    if (pathname !== "/login" && pathname !== "/register") return;
+    if (pathname !== "/login" && pathname !== "/register") return null;
 
     const isLogin = pathname === "/login";
 
@@ -18,19 +18,27 @@ export default function AuthForm() {
 
         const formData = new FormData(e.target as HTMLFormElement);
         
-        const res = await fetch(`http://localhost:3000${pathname}`, {
-            method: "POST",
-            body: formData,
-        });
+        try {
+            const res = await fetch(`http://localhost:3000${pathname}`, {
+                method: "POST",
+                body: formData,
+            });
 
-        if (!res.ok) {
-            const data = await res.json();
-            setErrors(data.errors);
-        } else {
-            alert("Successfully logged in");
+            if (!res.ok) {
+                const data = await res.json();
+                setErrors(data.errors || ["An error occurred"]); 
+            } else {
+                if (!isLogin) {
+                    navigate("/login");
+                } else {
+                    navigate("/");
+                }
+            }
+        } catch (err) {
+            setErrors(["Network error. Please try again later."]);
+        } finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
-        navigate("/");
     }
 
     return (
