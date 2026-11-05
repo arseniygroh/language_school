@@ -1,6 +1,8 @@
 import { Link } from "react-router"
+import { useAuth } from "../context/AuthContext"
 
 export default function Header() {
+    const {user, logout} = useAuth();
 
     return (
         <header>
@@ -16,8 +18,24 @@ export default function Header() {
                     <li>
                         <Link to={"/contacts"}>Contact us</Link>
                     </li>
+                    {!user && (
+                        <>
+                        <li>
+                            <Link to={"/login"}>Log in</Link>
+                        </li>
+                        <li>
+                            <Link to={"/register"}>Sign up</Link>
+                        </li>
+                        </>
+                    )}
                 </ul>
             </nav>
+            {user && (
+                <div>
+                    <span>Hello, {user.username}</span>
+                    <button type="button" onClick={logout}>Log out</button>
+                </div>
+            )}
         </header>
     )
 }

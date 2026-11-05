@@ -1,11 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 export default function AuthForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [errors, setErrors] = useState<string[]>([]);
     const {pathname} = useLocation();
     const navigate = useNavigate();
+    const {login} = useAuth();
 
     if (pathname !== "/login" && pathname !== "/register") return null;
 
@@ -24,14 +26,18 @@ export default function AuthForm() {
                 body: formData,
             });
 
+            const data = await res.json();
+
             if (!res.ok) {
-                const data = await res.json();
                 setErrors(data.errors || ["An error occurred"]); 
             } else {
-                if (!isLogin) {
-                    navigate("/login");
-                } else {
+                if (isLogin) {
+                    login(data);
+                    alert("Successfully logged in");
                     navigate("/");
+                } else {
+                    alert("Registration successful. Please log in.");
+                    navigate("/login");
                 }
             }
         } catch (err) {
