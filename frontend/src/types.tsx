@@ -10,3 +10,16 @@ export type AuthContextType = {
     login: (userData: User) => void;
     logout: () => void;
 };
+
+export type LanguageClass = {
+    id: string;
+    title: string;
+    language: string;
+    level: string;
+    type: string;
+    teacher: string;
+    date: string;
+    price: number;
+    totalSeats: number;
+    availableSeats: number;
+};
