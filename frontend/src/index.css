@@ -5,6 +5,7 @@
 }
 
 body {
+    background-color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -25,6 +26,8 @@ body {
     font-size: 1.5rem;
     font-weight: 800;
     color: #0066ff;
+    position: relative;
+    z-index: 3;
     text-decoration: none;
 }
 
@@ -70,6 +73,7 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    z-index: 10;
 }
 
 .has-dropdown:hover .dropdown-menu {
@@ -94,7 +98,15 @@ body {
 }
 
 
+.main-header-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .user-profile {
+    position: relative;
+    z-index: 3;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -116,7 +128,7 @@ body {
 }
 
 .icon-menu {
-    display: block;
+    display: none;
     border: none;
     cursor: pointer;
     background-color: transparent;
@@ -344,6 +356,54 @@ body {
 }
   
 @media (max-width: 991px) {
+    .icon-menu {
+        display: block;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        padding-top: 150px;
+        padding-bottom: 30px;
+        padding-inline: 15px;
+        overflow: auto;
+        transition: left 0.3s;
+    }
+
+    .open-menu .main-nav {
+        left: 0;
+    }
+
+    .main-nav > ul {
+        flex-direction: column;
+        row-gap: 25px;
+        align-items: flex-end;
+    }
+
+    .main-nav > ul > li {
+        padding: 0;
+        border-right: none;
+        text-align: right;
+    }
+
+    .main-nav a {
+        font-size: 1.5rem;
+    }
+
+    .dropdown-menu {
+        display: none;
+    }
+
+    .dropdown-arrow {
+        display: none;
+    }
+    
+
+
     .hero-section {
       flex-direction: column;
       text-align: center;
@@ -363,5 +423,11 @@ body {
     
     .hero-slider-container {
       max-width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .main-header {
+        padding-inline: 15px;
     }
 }
