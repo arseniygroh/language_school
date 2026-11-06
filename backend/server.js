@@ -36,6 +36,19 @@ async function saveUsers(users) {
     await fs.writeFile(usersPath, JSON.stringify(users, null, 2));
 }
 
+async function getClasses() {
+    try {
+        const data = await fs.readFile(classesPath, "utf-8");
+        return JSON.parse(data);
+    } catch (e) {
+        throw e;
+    }
+}
+
+async function saveClasses(classes) {
+    await fs.writeFile(classesPath, JSON.stringify(classes, null, 2));
+}
+
 app.post("/register", upload.none(), async (req, res) => {
     try {
         const {username, email, password, confirmPassword} = req.body;
@@ -108,6 +121,7 @@ app.post("/login", upload.none(), async (req, res) => {
         return res.status(500).json({errors: ["Internal server error, try again"]});
     }
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
