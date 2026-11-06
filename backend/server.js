@@ -122,6 +122,15 @@ app.post("/login", upload.none(), async (req, res) => {
     }
 });
 
+app.get("/classes", async (req, res) => {
+    try {
+        const availableClasses = await getClasses();
+        return res.status(200).json({classes: availableClasses});
+    } catch(e) {
+        return res.status(500).json({error: "Internal server error"});
+    }
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
