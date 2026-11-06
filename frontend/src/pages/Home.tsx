@@ -5,11 +5,13 @@ export default function Home() {
     return (
         <div className="home-page">
             <section className="hero-section">
-                <div className="hero-content">
-                    <HeroSlider />
+                <div className="hero-text">
                     <h1>Learn new languages with ease</h1>
-                    <p>Join our shcool and a suitable class for you!</p>
+                    <p>Join our school and find a suitable class for you!</p>
                     <Link to="/classes" className="cta-button">Choose a class</Link>
+                </div>
+                <div className="hero-slider-container">
+                    <HeroSlider />
                 </div>
             </section>
             <section className="features-section">
