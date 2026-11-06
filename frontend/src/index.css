@@ -115,6 +115,41 @@ body {
     background-color: #ffcccc;
 }
 
+.icon-menu {
+    display: block;
+    border: none;
+    background-color: transparent;
+    width: 28px;
+    height: 20px;
+    position: relative;
+}
+
+.icon-menu span,
+.icon-menu::before,
+.icon-menu::after {
+    position: absolute;
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #0066ff;
+    left: 0;
+}
+
+.icon-menu span {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.icon-menu::before {
+    content: "";
+    top: 0;
+}
+
+.icon-menu::after {
+    content: "";
+    bottom: 0;
+}
+
 .home-page {
     max-width: 1200px;
     margin: 0 auto;

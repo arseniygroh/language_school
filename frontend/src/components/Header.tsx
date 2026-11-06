@@ -44,6 +44,7 @@ export default function Header() {
                 <div className="user-profile">
                     <span>Hello, <strong>{user.username}</strong></span>
                     <button type="button" onClick={logout} className="logout-btn">Log out</button>
+                    <button type="button" className="icon-menu"><span></span></button>
                 </div>
             )}
         </header>
