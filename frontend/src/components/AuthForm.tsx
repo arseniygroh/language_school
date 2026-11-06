@@ -48,37 +48,46 @@ export default function AuthForm() {
     }
 
     return (
-        <div>
-            <form action="" method="post" onSubmit={handleSubmit}>
-                {!isLogin && (
-                    <div>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" required id="username" name="username" />
+        <div className="auth-container">
+            <div className="auth-card">
+                <h2 className="auth-title">
+                    {isLogin ? "Log in to your account" : "Create an account"}
+                </h2>
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    {!isLogin && (
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input type="text" required id="username" name="username" className="form-input" />
+                        </div>
+                    )}
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" required id="email" name="email" className="form-input" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" required id="password" name="password" className="form-input" />
+                    </div>
+                    {!isLogin && (
+                        <div className="form-group">
+                            <label htmlFor="confirmPassword">Confirm password</label>
+                            <input type="password" required id="confirmPassword" name="confirmPassword" className="form-input" />
+                        </div>
+                    )}
+                    <button type="submit" disabled={isLoading} className="submit-btn">
+                        {isLoading ? "Submitting" : (isLogin ? "Log in" : "Sign up")}
+                    </button>
+                </form>
+                {errors && errors.length > 0 && (
+                    <div className="error-container">
+                        <ul className="error-list">
+                            {errors.map((e, index) => (
+                                <li key={index} className="error-item">{e}</li>
+                            ))}
+                        </ul>
                     </div>
                 )}
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" required id="email" name="email" />
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" required id="password" name="password" />
-                </div>
-                {!isLogin && (
-                    <div>
-                        <label htmlFor="confirmPassword">Confirm password</label>
-                        <input type="password" required id="confirmPassword" name="confirmPassword" />
-                    </div>
-                )}
-                <button type="submit" disabled={isLoading}>{isLoading ? "Submitting" : "Submit"}</button>
-            </form>
-            {errors && errors.length > 0 && (
-                <ul>
-                    {errors.map(e => {
-                        return <li key={e}>{e}</li>
-                    })}
-                </ul>
-            )}
+            </div>
         </div>
-    )
+    );
 }
