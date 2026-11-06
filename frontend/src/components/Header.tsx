@@ -1,8 +1,13 @@
 import { Link } from "react-router"
 import { useAuth } from "../context/AuthContext"
 
+
 export default function Header() {
     const {user, logout} = useAuth();
+
+    function handleClick() {
+        document.documentElement.classList.toggle("open-menu");
+    }
 
     return (
         <header className="main-header">
@@ -44,7 +49,7 @@ export default function Header() {
                 <div className="user-profile">
                     <span>Hello, <strong>{user.username}</strong></span>
                     <button type="button" onClick={logout} className="logout-btn">Log out</button>
-                    <button type="button" className="icon-menu"><span></span></button>
+                    <button type="button" onClick={handleClick} className="icon-menu"><span></span></button>
                 </div>
             )}
         </header>
